@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Elegant Luxury Editorial Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        obsidian: {
+                            900: '#060309',
+                            800: '#0c0714',
+                            700: '#140c21'
+                        },
+                        accent: {
+                            rose: '#fda4af',
+                            crimson: '#f43f5e',
+                            gold: '#f59e0b',
+                            amethyst: '#c084fc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #060309;
+            overflow-x: hidden;
+        }
+        /* Glassmorphism system */
+        .glass {
+            background: rgba(12, 7, 20, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-bright {
+            background: rgba(253, 164, 175, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(253, 164, 175, 0.12);
+        }
+        .glass-hover:hover {
+            border-color: rgba(244, 63, 94, 0.25);
+            background: rgba(244, 63, 94, 0.01);
+            box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.1);
+        }
+        /* Custom cursor dot */
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #fda4af;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        /* Animations */
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: subtle-float 7s ease-in-out infinite;
+        }
+        .step-transition {
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        /* Perspective systems */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        /* Custom typing cursor */
+        .typed-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #fda4af;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        /* Heartbeat pulses */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            40% { transform: scale(1.02); }
+            60% { transform: scale(1.07); }
+        }
+        .heart-pulse {
+            animation: heartbeat 1.8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-100 select-none antialiased relative min-h-screen">
+
+    <!-- Interactive Canvas Particle Field (Stardust & Floating Hearts) -->
+    <canvas id="cosmic-canvas" class="fixed inset-0 w-full h-full -z-10 opacity-85 pointer-events-none"></canvas>
+
+    <!-- Custom Cursor System (Dot is retained, outline is replaced by trail) -->
+    <div id="cursor-dot" class="cursor-dot fixed rounded-full transform -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
+
+    <main class="min-h-screen flex items-center justify-center px-4 py-12 relative z-10">
+
+        <!-- ================= CHAPTER 1: THE LOCK GATE ================= -->
+        <section id="step-1" class="step-transition w-full max-w-md glass p-8 md:p-10 rounded-3xl text-center relative overflow-hidden flex flex-col items-center">
+            <!-- Background glow ambient blobs -->
+            <div class="absolute -top-24 -left-24 w-52 h-52 rounded-full bg-accent-crimson/10 blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-52 h-52 rounded-full bg-accent-amethyst/10 blur-3xl"></div>
+
+            <div class="relative z-10 w-full">
+                <div class="mb-6 inline-flex p-4 rounded-full bg-white/5 border border-white/10 text-accent-rose heart-pulse">
+                    <i data-lucide="heart" class="w-8 h-8 fill-accent-crimson"></i>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-serif font-semibold tracking-tight text-white mb-2">
+                     A Thousand Feelings in a Few Lines of Code
+                </h1>
+                <p class="text-slate-400 font-light text-sm mb-8 max-w-xs mx-auto">
+                    To access this private chapter of our journey, enter our special monthsary day number below.
+                </p>
+
+                <!-- Custom Monthsary Selector -->
+                <div class="space-y-5 w-full max-w-xs mx-auto">
+                    <div class="flex items-center justify-center gap-3">
+                        <button onclick="changeDay(-1)" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 active:scale-95 transition-all">
+                            <i data-lucide="chevron-left" class="w-5 h-5 text-slate-300"></i>
+                        </button>
+                        <div class="w-24 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-3xl font-serif font-semibold text-accent-rose select-none" id="day-display">
+                            1
+                        </div>
+                        <button onclick="changeDay(1)" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 active:scale-95 transition-all">
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300"></i>
+                        </button>
+                    </div>
+
+                    <button id="btn-unlock" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-accent-crimson to-accent-amethyst text-white font-semibold tracking-wide hover:opacity-95 transition-all shadow-lg shadow-accent-crimson/20 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 mt-2">
+                        Unlock My Heart
+                        <i data-lucide="lock" class="w-4 h-4" id="unlock-icon"></i>
+                    </button>
+                    <p id="unlock-feedback" class="text-xs text-accent-crimson h-4 opacity-0 transition-opacity duration-300">
+                        That number doesn't match our calendar...
+                    </p>
+                </div>
+
+                <div class="text-[10px] text-slate-600 mt-6 tracking-widest uppercase">
+                    Generative Soundscape Enabled • Sound On
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CHAPTER 2: THE CONSTELLATION OF MEMORIES ================= -->
+        <section id="step-2" class="step-transition hidden opacity-0 w-full max-w-4xl glass p-8 md:p-12 rounded-3xl relative">
+            <div class="absolute -top-32 -right-32 w-72 h-72 rounded-full bg-accent-amethyst/10 blur-3xl"></div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-accent-rose font-semibold">Chapter I</span>
+                    <h2 class="text-3xl font-serif text-white mt-1">Our Tiny Coordinates</h2>
+                </div>
+                <div class="text-xs text-slate-500 font-mono flex items-center gap-2">
+                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                    Click each tile to unveil our stargaze
+                </div>
+            </div>
+
+            <!-- Memory Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                
+                <!-- Tile 1 -->
+                <div class="perspective-1000 h-64 cursor-pointer group memory-card">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d card-inner">
+                        <!-- Front -->
+                        <div class="absolute inset-0 glass glass-hover rounded-2xl p-6 flex flex-col justify-between backface-hidden overflow-hidden">
+                            <!-- Background Image with load/error fallback protection -->
+                            <img id="card-img-1" src="first_chapter.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-35 z-0 pointer-events-none hidden" onload="this.classList.remove('hidden')" onerror="this.style.display='none'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900/60 to-transparent z-10"></div>
+                            
+                            <div class="relative z-20 flex flex-col justify-between h-full w-full">
+                                <div class="text-accent-rose"><i data-lucide="sparkles" class="w-6 h-6"></i></div>
+                                <div>
+                                    <h3 class="font-serif text-xl text-white mb-1">The First Chapter</h3>
+                                    <p class="text-xs text-slate-400">Where our stories silently crossed paths in this endless universe.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-accent-amethyst/20 to-accent-crimson/20 border border-accent-rose/30 rounded-2xl p-6 flex flex-col justify-between backface-hidden rotate-y-180 z-30">
+                            <p class="text-xs leading-relaxed text-slate-300">
+                                "The day we met on mobile game my absolute favorite part. Out of all the people, times, and play, our invisible threads found each other perfectly."
+                            </p>
+                            <span class="text-[10px] text-accent-rose font-semibold uppercase tracking-wider">How We Began</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 2 -->
+                <div class="perspective-1000 h-64 cursor-pointer group memory-card">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d card-inner">
+                        <!-- Front -->
+                        <div class="absolute inset-0 glass glass-hover rounded-2xl p-6 flex flex-col justify-between backface-hidden overflow-hidden">
+                            <!-- Background Image with load/error fallback protection -->
+                            <img id="card-img-2" src="unforgettable_moments.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-35 z-0 pointer-events-none hidden" onload="this.classList.remove('hidden')" onerror="this.style.display='none'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900/60 to-transparent z-10"></div>
+
+                            <div class="relative z-20 flex flex-col justify-between h-full w-full">
+                                <div class="text-accent-rose"><i data-lucide="smile" class="w-6 h-6"></i></div>
+                                <div>
+                                    <h3 class="font-serif text-xl text-white mb-1">Unforgettable Moments</h3>
+                                    <p class="text-xs text-slate-400">For every shared joke, quiet laugh, and unfiltered safe space.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-accent-crimson/20 to-accent-rose/10 border border-accent-rose/30 rounded-2xl p-6 flex flex-col justify-between backface-hidden rotate-y-180 z-30">
+                            <p class="text-xs leading-relaxed text-slate-300">
+                                "My Favotire Moments is when we eating on my room while watching and seeing you enjoying eating the 24 chicken that you always want to eat. i don't care where we go as long as i see your smile while eating that's my favorite view your gesture of your body for satisfaction is make me Happy"
+                            </p>
+                            <span class="text-[10px] text-accent-rose font-semibold uppercase tracking-wider">Our Safe Haven</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 3 -->
+                <div class="perspective-1000 h-64 cursor-pointer group memory-card">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d card-inner">
+                        <!-- Front -->
+                        <div class="absolute inset-0 glass glass-hover rounded-2xl p-6 flex flex-col justify-between backface-hidden overflow-hidden">
+                            <!-- Background Image with load/error fallback protection -->
+                            <img id="card-img-3" src="another_chapter.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-35 z-0 pointer-events-none hidden" onload="this.classList.remove('hidden')" onerror="this.style.display='none'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900/60 to-transparent z-10"></div>
+
+                            <div class="relative z-20 flex flex-col justify-between h-full w-full">
+                                <div class="text-accent-rose"><i data-lucide="book" class="w-6 h-6"></i></div>
+                                <div>
+                                    <h3 class="font-serif text-xl text-white mb-1">Another Chapter</h3>
+                                    <p class="text-xs text-slate-400">Celebrating yet another beautiful month of choosing us.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-accent-rose/20 to-accent-amethyst/20 border border-accent-rose/30 rounded-2xl p-6 flex flex-col justify-between backface-hidden rotate-y-180 z-30">
+                            <p class="text-xs leading-relaxed text-slate-300">
+                                "This monthsary isn't just a count on a calendar it's another chapter where we chose each other every day, through every little smile, text, and dream."
+                            </p>
+                            <span class="text-[10px] text-accent-rose font-semibold uppercase tracking-wider">The Milestone</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Direction Action -->
+            <div class="flex justify-end">
+                <button id="btn-to-step-3" class="py-3 px-6 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all flex items-center gap-2 group text-sm font-semibold">
+                    Step Into Our Promises
+                    <i data-lucide="chevron-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= CHAPTER 3: UNFOLDING HEART ================= -->
+        <section id="step-3" class="step-transition hidden opacity-0 w-full max-w-xl glass p-8 md:p-10 rounded-3xl text-center relative">
+            <div class="absolute -bottom-24 -left-24 w-60 h-60 rounded-full bg-accent-rose/10 blur-3xl"></div>
+
+            <span class="text-xs uppercase tracking-widest text-accent-rose font-semibold">Chapter II</span>
+            <h2 class="text-3xl font-serif text-white mt-1 mb-2">My Sacred Promises</h2>
+            <p id="origami-desc" class="text-xs text-slate-400 mb-8 max-w-xs mx-auto">
+                Click each of the three pulse points on my origami heart to unfold my sacred promises to you.
+            </p>
+
+            <!-- Sophisticated Interactive Origami Heart SVG -->
+            <div class="relative w-52 h-52 mx-auto mb-8 flex justify-center items-center">
+                <svg viewBox="0 0 200 200" class="w-full h-full select-none overflow-visible">
+                    <defs>
+                        <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fda4af" stop-opacity="0.2" />
+                            <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.05" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Base geometric origami outlines -->
+                    <path d="M 100 160 L 50 110 L 50 70 L 100 110 Z" fill="url(#heartGrad)" stroke="#fda4af" stroke-opacity="0.3" stroke-width="1"/>
+                    <path d="M 100 160 L 150 110 L 150 70 L 100 110 Z" fill="url(#heartGrad)" stroke="#fda4af" stroke-opacity="0.3" stroke-width="1"/>
+                    <path d="M 50 70 L 75 45 L 100 70 L 100 110 Z" fill="url(#heartGrad)" stroke="#fda4af" stroke-opacity="0.3" stroke-width="1"/>
+                    <path d="M 150 70 L 125 45 L 100 70 L 100 110 Z" fill="url(#heartGrad)" stroke="#fda4af" stroke-opacity="0.3" stroke-width="1"/>
+
+                    <!-- Point 1: Sanctuary -->
+                    <g id="pulse-point-1" class="cursor-pointer group">
+                        <circle cx="65" cy="80" r="10" fill="#f43f5e" fill-opacity="0.15" class="animate-ping" style="transform-origin: 65px 80px; animation-duration: 2s;"></circle>
+                        <circle cx="65" cy="80" r="4" fill="#fda4af" stroke="#ffffff" stroke-width="1"></circle>
+                    </g>
+
+                    <!-- Point 2: Alignment -->
+                    <g id="pulse-point-2" class="cursor-pointer group">
+                        <circle cx="100" cy="115" r="12" fill="#c084fc" fill-opacity="0.15" class="animate-ping" style="transform-origin: 100px 115px; animation-duration: 2.5s;"></circle>
+                        <circle cx="100" cy="115" r="4" fill="#c084fc" stroke="#ffffff" stroke-width="1"></circle>
+                    </g>
+
+                    <!-- Point 3: Tomorrow -->
+                    <g id="pulse-point-3" class="cursor-pointer group">
+                        <circle cx="135" cy="80" r="10" fill="#f43f5e" fill-opacity="0.15" class="animate-ping" style="transform-origin: 135px 80px; animation-duration: 2s;"></circle>
+                        <circle cx="135" cy="80" r="4" fill="#fda4af" stroke="#ffffff" stroke-width="1"></circle>
+                    </g>
+                </svg>
+
+                <!-- Floating display text under origami heart -->
+                <div class="absolute inset-0 pointer-events-none flex items-center justify-center"></div>
+            </div>
+
+            <!-- Promise message panel -->
+            <div class="glass bg-white/[0.01] p-5 rounded-2xl min-h-[90px] flex items-center justify-center mb-6">
+                <p id="promise-board" class="text-sm text-slate-300 font-serif italic">
+                    "A heart waiting to unfold its secrets..."
+                </p>
+            </div>
+
+            <!-- Next button -->
+            <button id="btn-to-step-4" disabled class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-accent-crimson/30 to-accent-amethyst/30 text-slate-500 font-semibold cursor-not-allowed tracking-wide transition-all duration-300">
+                Unlock My Final Letter
+            </button>
+        </section>
+
+
+        <!-- ================= CHAPTER 4: THE COSMIC LETTER ================= -->
+        <section id="step-4" class="step-transition hidden opacity-0 w-full max-w-2xl glass p-8 md:p-12 rounded-3xl relative overflow-hidden">
+            <div class="absolute -top-36 -left-36 w-80 h-80 rounded-full bg-accent-crimson/10 blur-3xl"></div>
+            <div class="absolute -bottom-36 -right-36 w-80 h-80 rounded-full bg-accent-amethyst/10 blur-3xl"></div>
+
+            <div class="relative z-10">
+                <div class="flex justify-between items-start mb-10">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-accent-rose font-semibold">Final Chapter</span>
+                        <h2 class="text-3xl md:text-4xl font-serif text-white mt-1">My Love Letter</h2>
+                    </div>
+                    <div class="p-3 bg-white/5 border border-white/10 text-accent-rose rounded-xl animate-float">
+                        <i data-lucide="mail-open" class="w-6 h-6"></i>
+                    </div>
+                </div>
+
+                <!-- Elegant letter container -->
+                <div class="glass bg-white/[0.01] p-6 md:p-8 rounded-2xl min-h-[240px] mb-8 relative border border-white/5 shadow-inner">
+                    <i data-lucide="sparkle" class="absolute top-4 left-4 w-4 h-4 text-accent-rose/30"></i>
+                    <i data-lucide="sparkle" class="absolute bottom-4 right-4 w-4 h-4 text-accent-amethyst/30"></i>
+                    
+                    <!-- Dynamic self-typing greeting text area -->
+                    <div class="font-serif italic text-base md:text-lg text-slate-200 leading-relaxed" id="letter-content">
+                        <!-- Typist will print here -->
+                    </div>
+                </div>
+
+                <!-- Controls and love showering action -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <span class="text-xs text-slate-500 font-mono italic">To the edge of the universe and back.</span>
+                    
+                    <button id="btn-shower" class="py-3 px-6 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent-rose/30 hover:shadow-lg hover:shadow-accent-rose/5 transition-all flex items-center gap-2 group text-sm font-semibold text-accent-rose">
+                        <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                        Shower with Love
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Init Lucide with safe fallback verification
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        /* ================= PERSONAL CUSTOMIZATION CONFIG ================= */
+        const Monthsary_DAY = 22;      // Date of your monthsary (must match this number to unlock Chapter 2)
+        const MY_NAME = "Primo";       // Your name
+        const HER_NAME = "Alyssa";     // Your girlfriend's name
+
+        /* ================= BUILT-IN NATIVE AUDIO SYNTH (Web Audio API) ================= */
+        class MusicalKalimba {
+            constructor() {
+                this.ctx = null;
+            }
+            init() {
+                if (!this.ctx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) {
+                        this.ctx = new AudioContextClass();
+                    }
+                }
+            }
+            playTine(freq, duration = 1.2, volume = 0.12) {
+                this.init();
+                if (!this.ctx) return;
+                
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                
+                gain.gain.setValueAtTime(volume, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            }
+            playUnlockChord() {
+                const notes = [329.63, 392.00, 523.25, 659.25]; // E4, G4, C5, E5
+                notes.forEach((f, i) => {
+                    setTimeout(() => this.playTine(f, 1.5, 0.1), i * 120);
+                });
+            }
+            playDissonantError() {
+                this.playTine(180, 0.4, 0.15);
+                setTimeout(() => this.playTine(160, 0.5, 0.15), 80);
+            }
+            playDreamyArpeggio() {
+                const chord = [440.00, 554.37, 659.25, 880.00]; // A4, C#5, E5, A5
+                chord.forEach((f, i) => {
+                    setTimeout(() => this.playTine(f, 1.8, 0.08), i * 100);
+                });
+            }
+        }
+        const synth = new MusicalKalimba();
+
+
+        /* ================= INTERACTIVE COSMIC PARTICLES BACKGROUND ================= */
+        const canvas = document.getElementById('cosmic-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let hearts = [];
+        let mouse = { x: null, y: null };
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Star {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 10;
+                this.size = Math.random() * 1.5 + 0.3;
+                this.speedY = -(Math.random() * 0.4 + 0.1);
+                this.alpha = Math.random() * 0.5 + 0.2;
+                this.color = `rgba(253, 164, 175, ${this.alpha})`;
+            }
+            update() {
+                this.y += this.speedY;
+                if (this.y < -10) this.reset();
+
+                // Mouse interaction repulsion
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        this.x -= dx * 0.01;
+                        this.y -= dy * 0.01;
+                    }
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        class FloatingHeart {
+            constructor(x, y) {
+                this.x = (x !== undefined && x !== null) ? x : Math.random() * canvas.width;
+                this.y = (y !== undefined && y !== null) ? y : canvas.height + 20;
+                this.size = Math.random() * 15 + 8;
+                this.speedY = -(Math.random() * 1.5 + 0.6);
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.005 + 0.004;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.fillStyle = '#f43f5e';
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size/2, -this.size/2, -this.size, 0, 0, this.size);
+                ctx.bezierCurveTo(this.size, 0, this.size/2, -this.size/2, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        class CursorHeart {
+            constructor(x, y) {
+                this.x = (x !== undefined && x !== null) ? x : 0;
+                this.y = (y !== undefined && y !== null) ? y : 0;
+                this.size = Math.random() * 5 + 3;
+                this.speedY = -(Math.random() * 0.8 + 0.3);
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.fillStyle = '#fda4af';
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size/2, -this.size/2, -this.size, 0, 0, this.size);
+                ctx.bezierCurveTo(this.size, 0, this.size/2, -this.size/2, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.min(Math.floor(canvas.width / 12), 110);
+            for (let i = 0; i < count; i++) {
+                stars.push(new Star());
+            }
+        }
+        initStars();
+
+        function renderLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            stars.forEach(s => {
+                s.update();
+                s.draw();
+            });
+
+            for (let i = hearts.length - 1; i >= 0; i--) {
+                hearts[i].update();
+                hearts[i].draw();
+                if (hearts[i].alpha <= 0) {
+                    hearts.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(renderLoop);
+        }
+        renderLoop();
+
+        let lastX = null;
+        let lastY = null;
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            
+            const dot = document.getElementById('cursor-dot');
+            if (dot) {
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+            }
+            
+            if (lastX !== null && lastY !== null) {
+                const dx = e.clientX - lastX;
+                const dy = e.clientY - lastY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist > 12) {
+                    hearts.push(new CursorHeart(e.clientX, e.clientY));
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                }
+            } else {
+                lastX = e.clientX;
+                lastY = e.clientY;
+            }
+        });
+
+
+        /* ================= GATE DECODER CONTROLS ================= */
+        let activeDay = 1;
+        const dayDisplay = document.getElementById('day-display');
+
+        function changeDay(offset) {
+            synth.playTine(280 + (activeDay * 5), 0.5, 0.08);
+            activeDay += offset;
+            if (activeDay < 1) activeDay = 31;
+            if (activeDay > 31) activeDay = 1;
+            dayDisplay.textContent = activeDay;
+        }
+
+        document.getElementById('btn-unlock').addEventListener('click', () => {
+            const feedback = document.getElementById('unlock-feedback');
+            const icon = document.getElementById('unlock-icon');
+            
+            if (activeDay === Monthsary_DAY) {
+                feedback.classList.add('opacity-0');
+                if (icon) {
+                    icon.setAttribute('data-lucide', 'lock-open');
+                }
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+                synth.playUnlockChord();
+                
+                for(let i=0; i<15; i++) {
+                    hearts.push(new FloatingHeart(canvas.width/2 + (Math.random()*200 - 100), canvas.height/2 + (Math.random()*200 - 100)));
+                }
+
+                transitionBetween('step-1', 'step-2');
+            } else {
+                synth.playDissonantError();
+                feedback.classList.remove('opacity-0');
+                const btn = document.getElementById('btn-unlock');
+                if (btn) {
+                    btn.classList.add('translate-x-2');
+                    setTimeout(() => btn.classList.remove('translate-x-2'), 100);
+                }
+            }
+        });
+
+
+        /* ================= GENERAL PAGE TRANSITION SYSTEM ================= */
+        function transitionBetween(fromId, toId, callback = null) {
+            const f = document.getElementById(fromId);
+            const t = document.getElementById(toId);
+            
+            if (f && t) {
+                f.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    f.classList.add('hidden');
+                    t.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        t.classList.remove('opacity-0', 'scale-95');
+                        if (callback) callback();
+                    }, 50);
+                }, 850);
+            }
+        }
+
+        /* Memory card flipping controls */
+        document.querySelectorAll('.memory-card').forEach(card => {
+            card.addEventListener('click', () => {
+                synth.playTine(440, 0.6, 0.04);
+                const inner = card.querySelector('.card-inner');
+                if (inner) {
+                    inner.classList.toggle('rotate-y-180');
+                }
+            });
+        });
+
+        /* Transition step 2 -> 3 */
+        const step3Btn = document.getElementById('btn-to-step-3');
+        if (step3Btn) {
+            step3Btn.addEventListener('click', () => {
+                synth.playDreamyArpeggio();
+                transitionBetween('step-2', 'step-3');
+            });
+        }
+
+
+        /* ================= UNFOLDING ORIGAMI PROMISES CONTROLS ================= */
+        const promises = {
+            1: "I promise to love you sincerely, honestly, and wholeheartedly, not only when things are easy but also when life becomes difficult.",
+            2: "I promise to you that no matter how many hard times or misunderstandings come between us, I will always choose you. Through every challenge, my heart will remain yours because I truly love you.",
+            3: "I promise to you with every month that drifts past, My love for you will always remain the same as when we first met."
+        };
+        const readPromises = new Set();
+
+        function handleUnfold(num, elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.style.display = 'none';
+            }
+            readPromises.add(num);
+            
+            synth.playTine(400 + (num * 100), 1.5, 0.08);
+            
+            const board = document.getElementById('promise-board');
+            if (board) {
+                board.classList.add('opacity-0');
+                setTimeout(() => {
+                    board.textContent = `"${promises[num]}"`;
+                    board.classList.remove('opacity-0');
+                }, 300);
+            }
+
+            for(let i=0; i<5; i++) {
+                hearts.push(new FloatingHeart(canvas.width/2 + (Math.random()*80 - 40), canvas.height/2 + (Math.random()*80 - 40)));
+            }
+
+            if (readPromises.size === 3) {
+                const nextBtn = document.getElementById('btn-to-step-4');
+                if (nextBtn) {
+                    nextBtn.removeAttribute('disabled');
+                    nextBtn.classList.replace('from-accent-crimson/30', 'from-accent-crimson');
+                    nextBtn.classList.replace('to-accent-amethyst/30', 'to-accent-amethyst');
+                    nextBtn.classList.replace('text-slate-500', 'text-white');
+                    nextBtn.classList.add('shadow-lg', 'shadow-accent-crimson/20', 'hover:scale-[1.01]', 'cursor-pointer');
+                }
+                
+                const desc = document.getElementById('origami-desc');
+                if (desc) {
+                    desc.textContent = "My promises have completely unfolded. The final envelope is open.";
+                }
+            }
+        }
+
+        const point1 = document.getElementById('pulse-point-1');
+        const point2 = document.getElementById('pulse-point-2');
+        const point3 = document.getElementById('pulse-point-3');
+
+        if (point1) point1.addEventListener('click', () => handleUnfold(1, 'pulse-point-1'));
+        if (point2) point2.addEventListener('click', () => handleUnfold(2, 'pulse-point-2'));
+        if (point3) point3.addEventListener('click', () => handleUnfold(3, 'pulse-point-3'));
+
+        /* Transition step 3 -> 4 */
+        const step4Btn = document.getElementById('btn-to-step-4');
+        if (step4Btn) {
+            step4Btn.addEventListener('click', () => {
+                if (readPromises.size === 3) {
+                    synth.playDreamyArpeggio();
+                    transitionBetween('step-3', 'step-4', () => {
+                        executeLetterTypewriter();
+                    });
+                }
+            });
+        }
+
+
+        /* ================= LETTER TYPEWRITER ENGINE ================= */
+        function executeLetterTypewriter() {
+            const textToPrint = `My dearest Alyssa,<br><br>
+            First of all, I want to greet you a Happy Monthsary. Another beautiful month has passed with us being together, and another month has been filled with admiration for the amazing person that you are.<br><br>
+            I want you to always remember that you are the safest, warmest, and most cherished place my heart has ever known. Thank you for sharing your beautiful smiles, your silly laughter, and ideas with me. Every moment we spend together is something I will always treasure. <br><br>
+            I also want you to know that I will always be here for you. Whenever you're facing a problem, you can always talk to me because I will gladly be your listening buddy. Sometimes, I want to ask if something is bothering you because I can see it in your eyes, especially the last time we met. However, I hesitate because I don't want to invade your personal space.<br><br>
+            Even so, I want you to know that you never have to be afraid to open up to me. You don't have to carry your burdens alone because I will always be here to listen, support you, and stand by your side through everything.<br><br>
+            Thank you for allowing me to be part of your life and for making every day more meaningful. No matter what challenges or misunderstandings we may face, I will always choose you because my love for you is genuine and unwavering.<br><br>
+            Forever & Always,<br>
+            Your Primo `;
+
+            const letterArea = document.getElementById('letter-content');
+            if (!letterArea) return;
+            
+            let idx = 0;
+            letterArea.innerHTML = "";
+
+            const caret = document.createElement('span');
+            caret.className = 'typed-cursor';
+            caret.innerHTML = '|';
+            letterArea.appendChild(caret);
+
+            function printChar() {
+                if (idx < textToPrint.length) {
+                    if (textToPrint.substr(idx, 4) === '<br>') {
+                        letterArea.insertBefore(document.createElement('br'), caret);
+                        idx += 4;
+                    } else if (textToPrint.substr(idx, 25).startsWith('<span class="text-accent-rose')) {
+                        const targetEnd = textToPrint.indexOf('</span>', idx);
+                        const markup = textToPrint.substring(idx, targetEnd + 7);
+                        const wrap = document.createElement('div');
+                        wrap.innerHTML = markup;
+                        if (wrap.firstChild) {
+                            letterArea.insertBefore(wrap.firstChild, caret);
+                        }
+                        idx = targetEnd + 7;
+                    } else {
+                        const character = textToPrint.charAt(idx);
+                        const node = document.createTextNode(character);
+                        letterArea.insertBefore(node, caret);
+                        idx++;
+                        
+                        if (Math.random() > 0.88) {
+                            synth.playTine(1000 + (Math.random() * 300), 0.12, 0.01);
+                        }
+                    }
+                    setTimeout(printChar, 40);
+                } else {
+                    if (caret.parentNode) {
+                        caret.parentNode.removeChild(caret);
+                    }
+                }
+            }
+            printChar();
+        }
+
+        /* Shower With Love Action */
+        const showerBtn = document.getElementById('btn-shower');
+        if (showerBtn) {
+            showerBtn.addEventListener('click', () => {
+                synth.playDreamyArpeggio();
+                for (let i = 0; i < 40; i++) {
+                    setTimeout(() => {
+                        hearts.push(new FloatingHeart(Math.random() * canvas.width, canvas.height + 20));
+                    }, i * 60);
+                }
+            });
+        }
+
+        // Check local storage for previewing inside browser
+        window.addEventListener('DOMContentLoaded', () => {
+            for (let i = 1; i <= 3; i++) {
+                const storedImg = localStorage.getItem(`monthsary_img_${i}`);
+                const imgElement = document.getElementById(`card-img-${i}`);
+                if (storedImg && imgElement) {
+                    imgElement.src = storedImg;
+                    imgElement.classList.remove('hidden');
+                    imgElement.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
